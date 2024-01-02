@@ -71,4 +71,11 @@ const pointsMarked = elem.querySelectorAll('.points');
         pointsMarked[i].classList.add('marked')
     }
 
-})
+});
+
+
+
+// mix it up portfolio section..................
+
+
+var mixer = mixitup('.portfolio-gallery')
