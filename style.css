@@ -51,6 +51,11 @@
   }
 
   header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid transparent ;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -78,6 +83,7 @@
     font-weight: 500;
   }
 
+ 
   .navlist a:hover{
     color: var(--hover-color);
     text-shadow:0 0 10px  rgba(18,247,255,0.6),
@@ -90,12 +96,15 @@
     0 0 150px  rgba(18,247,255,0.6); ;
   }
 
-
+  .navlist a.active{
+    color: var(--hover-color);
+  }
   #menu-icon{
     font-size: 1.8rem;
     z-index: 10001;
     cursor: pointer;
     margin-left: 25px;
+    display: none;
     background-color: var(--hover-color);
     border-radius: 3px;
     color: var(--secon-bg-color);
