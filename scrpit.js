@@ -104,3 +104,31 @@ let section = document.querySelectorAll('section')
 
   activeMenu()
   window.addEventListener('scroll',activeMenu)
+
+
+
+  const header = document.querySelector('header');
+
+
+  window.addEventListener('scroll',function() {
+
+      header.classList.toggle('sticky',window.scrollY > 50)
+    
+  });
+
+  // toggle icon navpar /////////////////
+
+  let menuicon = document.querySelector('#menu-icon');
+  let navlist = document.querySelector('.navlist')
+
+
+  menuicon.onclick = ()=>{
+    navlist.classList.toggle('open');
+    menuicon.classList.toggle('bx-x');
+  }
+
+  window.onscroll = ()=>{
+    navlist.classList.remove('open');
+    menuicon.classList.remove('bx-x');
+  }
+
