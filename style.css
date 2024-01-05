@@ -86,10 +86,13 @@
 }
 
   .navlist a{
- 
+   display: inline-block;
     color: var(--text-color);
     padding: 10px 20px;
     font-weight: 500;
+    animation: slideanimation 1s ease forwards;
+    animation-delay: calc(.3s * var(--i));
+    opacity: 0;
   }
 
  
@@ -664,7 +667,7 @@
   text-align: center;
 }
 
-.fillter-buttons .btn{
+.fillter-buttons .button{
  background: none;
  outline: none;
 border: none;
@@ -676,7 +679,7 @@ margin-left: 1.3rem;
 color: var(--text-color);
 }
 
-.fillter-buttons .btn:hover{
+.fillter-buttons .button:hover{
   color: var(--hover-color);
 }
 
@@ -852,12 +855,32 @@ footer a i {
 
 
 
+/*  parallax .......................... //*/
 
+.scroll-scale{
 
+        opacity: 0;
+        transform: scale(.9);
+        transition: all 2s;
 
+}
 
+.scroll-bottom{
+  opacity: 0;
+  transform: translateY(300px);
+  transition: 3s;
+}
 
+.scroll-top{
+  opacity: 0;
+  transform: translateY(-300px);
+  transition: 3s;
+}
 
+.show-items{
+  opacity: 1;
+  transform: translateX(0);
+}
 
 
 
@@ -940,6 +963,24 @@ footer a i {
       box-shadow: var(--neon-box-shadow);
     }
 }
+
+
+
+
+@keyframes slideanimation {
+
+  0%{
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+}
+
+
 
 
 @media (max-width:991px) {
@@ -1044,7 +1085,7 @@ footer a i {
     font-size: .6rem;
    }
 
-   .fillter-buttons .btn{
+   .fillter-buttons .button{
     font-size:.8rem ;
    }
 
@@ -1058,5 +1099,5 @@ footer a i {
    .img-about p{
     font-size: 1rem;
    }
-   
+
 }
