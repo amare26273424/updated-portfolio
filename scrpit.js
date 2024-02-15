@@ -1,164 +1,131 @@
-let words = document.querySelectorAll('.word');
+let words = document.querySelectorAll(".word");
 
 words.forEach((word) => {
-  let letters = word.textContent.split('');
-  word.textContent = '';
+  let letters = word.textContent.split("");
+  word.textContent = "";
   letters.forEach((letter) => {
-    let span = document.createElement('span');
+    let span = document.createElement("span");
     span.textContent = letter;
-    span.className = 'letter';
+    span.className = "letter";
     word.append(span);
   });
 });
 
 let currentWordIndex = 0;
 let maxWordIndex = words.length - 1;
-words[currentWordIndex].style.opacity = '1';
+words[currentWordIndex].style.opacity = "1";
 
 let changeText = () => {
   let currentWord = words[currentWordIndex];
-  let nextWord = currentWordIndex === maxWordIndex ? words[0] : words[currentWordIndex + 1];
+  let nextWord =
+    currentWordIndex === maxWordIndex ? words[0] : words[currentWordIndex + 1];
 
   Array.from(currentWord.children).forEach((letter, i) => {
     setTimeout(() => {
-      letter.className = 'letter out';
+      letter.className = "letter out";
     }, i * 40);
   });
 
-  nextWord.style.opacity = '1';
+  nextWord.style.opacity = "1";
 
   Array.from(nextWord.children).forEach((letter, i) => {
-    letter.className = 'letter behind';
+    letter.className = "letter behind";
     setTimeout(() => {
-      letter.className = 'letter in';
+      letter.className = "letter in";
     }, 170 * i);
   });
 
-  currentWordIndex = currentWordIndex === maxWordIndex ? 0 : currentWordIndex + 1;
+  currentWordIndex =
+    currentWordIndex === maxWordIndex ? 0 : currentWordIndex + 1;
 };
 
 changeText();
 setInterval(changeText, 4000);
 
-
 //circle skill ............................../////
 
+const circles = document.querySelectorAll(".circle");
 
+circles.forEach((elem) => {
+  var dots = elem.getAttribute("data-dots");
+  var marked = elem.getAttribute("data-percent");
+  var percent = Math.floor((dots * marked) / 100);
+  var points = "";
+  var rotate = 360 / dots;
 
-const circles =document.querySelectorAll('.circle')
+  for (let i = 0; i < dots; i++) {
+    points += ` <div class="points" style="--i:${i};--rot:${rotate}deg"></div>`;
+  }
 
-circles.forEach(elem =>{
+  elem.innerHTML = points;
 
-      var dots = elem.getAttribute('data-dots')
-      var  marked =elem.getAttribute('data-percent')
-      var percent = Math.floor( (dots*marked)/100)
-      var points ="";
-      var rotate = 360 / dots;
+  const pointsMarked = elem.querySelectorAll(".points");
 
-
-      for( let i = 0; i < dots ; i++ ){
-           
-          points += ` <div class="points" style="--i:${i};--rot:${rotate}deg"></div>`      
-      }
-        
-elem.innerHTML=points;
-
-
-const pointsMarked = elem.querySelectorAll('.points');
-
-    for(let i  = 0; i < percent; i++){
-
-        pointsMarked[i].classList.add('marked')
-    }
-
+  for (let i = 0; i < percent; i++) {
+    pointsMarked[i].classList.add("marked");
+  }
 });
-
-
 
 // mix it up portfolio section..................
 
-
-var mixer = mixitup('.portfolio-gallery')
-
-
-
-
-
-
+var mixer = mixitup(".portfolio-gallery");
 
 // detive menu  .........................
-let menuLi = document.querySelectorAll('header ul li a');
-let section = document.querySelectorAll('section')
+let menuLi = document.querySelectorAll("header ul li a");
+let section = document.querySelectorAll("section");
 
-   function activeMenu(){
+function activeMenu() {
+  let len = section.length;
 
-    let len = section.length
+  while (--len && window.scrollY + 97 < section[len].offsetTop) {}
 
-    while (--len  && window.scrollY +97 < section[len].offsetTop){}
-
-    menuLi.forEach(sec=>{sec.classList.remove('active') });
-    menuLi[len].classList.add('active');
-           
-  
-  }
-
-  activeMenu()
-  window.addEventListener('scroll',activeMenu)
-
-
-
-  const header = document.querySelector('header');
-
-
-  window.addEventListener('scroll',function() {
-
-      header.classList.toggle('sticky',window.scrollY > 50)
-    
+  menuLi.forEach((sec) => {
+    sec.classList.remove("active");
   });
+  menuLi[len].classList.add("active");
+}
 
-  // toggle icon navpar /////////////////
+activeMenu();
+window.addEventListener("scroll", activeMenu);
 
-  let menuicon = document.querySelector('#menu-icon');
-  let navlist = document.querySelector('.navlist')
+const header = document.querySelector("header");
 
+window.addEventListener("scroll", function () {
+  header.classList.toggle("sticky", window.scrollY > 50);
+});
 
-  menuicon.onclick = ()=>{
-    navlist.classList.toggle('open');
-    menuicon.classList.toggle('bx-x');
-  }
+// toggle icon navpar /////////////////
 
-  window.onscroll = ()=>{
-    navlist.classList.remove('open');
-    menuicon.classList.remove('bx-x');
-  }
+let menuicon = document.querySelector("#menu-icon");
+let navlist = document.querySelector(".navlist");
 
-  //parallelx //////////////////
+menuicon.onclick = () => {
+  navlist.classList.toggle("open");
+  menuicon.classList.toggle("bx-x");
+};
 
-  const observer = new IntersectionObserver((entries)=>{
+window.onscroll = () => {
+  navlist.classList.remove("open");
+  menuicon.classList.remove("bx-x");
+};
 
+//parallelx //////////////////
 
-
-            entries.forEach((entry)=>{
-
-
-              if(entry.isIntersecting){
-                entry.target.classList.add('show-items')
-              }
-              else{
-                entry.target.classList.remove('show-items')
-              }
-            });
-
-
-
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show-items");
+    } else {
+      entry.target.classList.remove("show-items");
+    }
   });
+});
 
+const scrollscale = document.querySelectorAll(".scroll-scale");
+scrollscale.forEach((el) => observer.observe(el));
 
-  const scrollscale = document.querySelectorAll('.scroll-scale');
-  scrollscale.forEach((el)=>observer.observe(el));
+const scrollbottom = document.querySelectorAll(".scroll-bottom");
+scrollbottom.forEach((el) => observer.observe(el));
 
-  const scrollbottom = document.querySelectorAll('.scroll-bottom');
-  scrollbottom.forEach((el)=>observer.observe(el));
-
-  const scrolltop = document.querySelectorAll('.scroll-top');
-  scrolltop.forEach((el)=>observer.observe(el));
+const scrolltop = document.querySelectorAll(".scroll-top");
+scrolltop.forEach((el) => observer.observe(el));
